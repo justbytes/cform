@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS CRYPTO_DB;
+create database CRYPTO_DB;
+
