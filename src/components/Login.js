@@ -1,60 +1,58 @@
 import React, { useState, useCallback } from 'react';
 import axios from 'axios';
+
+// Navigates after login or logout
 import { navigate, useNavigate } from 'react-router-dom';
 
+// Import bootstrap
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 function Login() {
+  // Initialize state vars
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  // set username to input field
   const handleUsernameChange = useCallback((event) => {
     setUsername(event.target.value);
   }, []);
 
+  // set password to input field
   const handlePasswordChange = useCallback((event) => {
     setPassword(event.target.value);
   }, []);
 
-  console.log(username, password);
-
+  // Login handler
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    console.log('you clicked login', password, username);
-
     try {
       const response = await axios.post('api/users/login', {
         username,
         password,
       });
       const { id, success } = response.data;
-      console.log('User logged in with id of:', id);
-      console.log('login success:', success);
-
+      // Redirect on success
       if (success) navigate('/user-page');
-      else console.log('login not successful');
+      else alert('Login attempt failed');
     } catch (error) {
       console.error(error);
     }
   };
-
+  // Signup handler
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
-    console.log('you clicked signup', password, username);
     try {
       const response = await axios.post('/api/users/signup', {
         username,
         password,
       });
       const { id, success } = response.data;
-      console.log('User logged in with id of:', id);
-      console.log('login success:', success);
 
+      // Redirect on success
       if (success) navigate('/user-page');
-      else alert('login unsuccessful');
-      console.log('login not successful');
+      else alert('Signup unsuccessful');
     } catch (error) {
       console.error(error);
     }

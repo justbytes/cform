@@ -1,27 +1,31 @@
 import React, { useState, useCallback } from 'react';
 import axios from 'axios';
 
+// Import bootstrap components
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
 const PostModal = ({ username, userID, toggle }) => {
+  // Initialize state variable
   const [description, setDescription] = useState('');
 
+  // Set description state var
   const handleChange = useCallback((event) => {
     setDescription(event.target.value);
   }, []);
 
+  // Closes the modal
   const handleClose = () => {
     toggle();
   };
 
+  // Post the post to the database
   const handlePost = async () => {
-    console.log(username, description);
+    // pass name of user and their post
     const postData = {
       name: username,
       description: description,
-      //   user_id: userID,
     };
     try {
       const response = await axios.post('/api/post/posts', postData);

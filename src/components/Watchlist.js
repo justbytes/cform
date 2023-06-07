@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
+
+// Import bootstrap components
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 
 const Watchlist = () => {
+  // Initialize state variables
   const [coins, setCoins] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Gets top 30 cryptos from backend api call sets them to state variable
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,10 +22,10 @@ const Watchlist = () => {
         setIsLoading(false);
       }
     };
-
     fetchData();
   }, []);
 
+  // Sets loading if loading
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -41,6 +45,7 @@ const Watchlist = () => {
       <div className="container5 postBox" id="existingPosts"></div>
 
       <div className="row center box blah">
+        {/* Maps through each coin and puts it into a card */}
         {coins.map((coin, index) => (
           <div key={index} className="col s12 indBox2">
             <Card className="top30-cards">

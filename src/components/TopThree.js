@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+// Import bootstrap components
 import Card from 'react-bootstrap/Card';
 
 const TopThree = () => {
+  // Initialize state vars
   const [bitcoinPrice, setBitcoinPrice] = useState(null);
   const [etherPrice, setEtherPrice] = useState(null);
   const [bnbPrice, setBnbPrice] = useState(null);
 
+  // Get BTC, ETHER, BNB current price and set to state var
   useEffect(() => {
     axios
       .get('/home')
       .then((response) => {
         console.log(response);
         const { BTC, ETH, BNB } = response.data;
+        // Format so there is no decimal
         setBitcoinPrice(BTC.quote.USD.price.toFixed(0));
         setEtherPrice(ETH.quote.USD.price.toFixed(0));
         setBnbPrice(BNB.quote.USD.price.toFixed(0));

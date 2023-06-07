@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 
+// Import bootstrap components
 import Card from 'react-bootstrap/Card';
 import TopThree from './TopThree';
 
@@ -13,8 +13,8 @@ const Home = () => {
         <Card.Body className="home-content-body">
           <p>
             Your crypto community awaits you! Follow your favoite coins with
-            your favoite people. Log in now to see posts or check out the top 30
-            trending cryptocurrencies
+            your favoite people. Log in now and start posting or go check out
+            the top 30 performing cryptocurrencies!
           </p>
         </Card.Body>
       </Card>
