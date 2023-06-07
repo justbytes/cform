@@ -59,3 +59,15 @@ code {
   justify-content: space-evenly;
 }
 /* End of Login/Signup style */
+
+
+/* Top 30 style */
+.top30-cards {
+  margin: 5px;
+}
+.top30-cards-content {
+  width: 400px;
+  text-align: center;
+  padding: 20px;
+}
+/* End of Top 30 style */

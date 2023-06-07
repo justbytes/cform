@@ -112,13 +112,16 @@ router.get('/top30', async (req, res) => {
     );
     const { data: coins } = await responseCoin.json();
 
-    res.render('top30', {
+    const responseData = {
       title: 'Top 30',
-
-      isLoggedIn: req.session.isLoggedIn,
       coins,
-      //history,
-    });
+    };
+
+    if (req.session.isLoggedIn) {
+      responseData.isLoggedIn = true;
+    }
+
+    res.json(responseData);
   } catch (error) {
     console.error(error);
     res.status(500).send('⛔ Uh oh! An unexpected error occurred.');
