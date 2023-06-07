@@ -8,7 +8,7 @@ router.post('/signup', async (req, res) => {
     req.session.isLoggedIn = true;
     req.session.userId = user.id;
     req.session.save(() => {
-      res.redirect('/home');
+      res.json({ id: user.id, success: true });
     });
   } catch (error) {
     console.error(error);
@@ -30,7 +30,7 @@ router.post('/login', async (req, res) => {
     req.session.isLoggedIn = true;
     req.session.userId = user.id;
     req.session.save(() => {
-      res.redirect('/home');
+      res.json({ id: user.id, success: true });
     });
   } catch (error) {
     console.error(error);

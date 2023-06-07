@@ -29,9 +29,12 @@ function Login() {
         username,
         password,
       });
-      const { id } = response.data;
+      const { id, success } = response.data;
       console.log('User logged in with id of:', id);
-      navigate('/');
+      console.log('login success:', success);
+
+      if (success) navigate('/user-page');
+      else console.log('login not successful');
     } catch (error) {
       console.error(error);
     }
@@ -45,9 +48,13 @@ function Login() {
         username,
         password,
       });
-      const { id } = response.data;
-      console.log('New user ID is:', id);
-      navigate('/');
+      const { id, success } = response.data;
+      console.log('User logged in with id of:', id);
+      console.log('login success:', success);
+
+      if (success) navigate('/user-page');
+      else alert('login unsuccessful');
+      console.log('login not successful');
     } catch (error) {
       console.error(error);
     }

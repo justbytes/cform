@@ -1,12 +1,22 @@
 [
     {
-        "username": "...",
-        "email": "...",
-        "password": "..."
+        "username": "cryptoisgreat",
+        "email": "test@email.com",
+        "password": "password"
     },
     {
-        "username": "...",
-        "email": "...",
-        "password": "..."
+        "username": "cryptoman",
+        "email": "test1@email.com",
+        "password": "password"
+    },
+    {
+        "username": "goodcrypto",
+        "email": "test2@email.com",
+        "password": "password"
+    },
+    {
+        "username": "veryCrypto",
+        "email": "test3@email.com",
+        "password": "password"
     }
 ]
