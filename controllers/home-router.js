@@ -1,15 +1,10 @@
 const fetch = require('node-fetch');
 const router = require('express').Router();
+
+// Get models
 const { User, Post } = require('../models');
-// use withAuth middleware to redirect from protected routes.
-// const withAuth = require("../util/withAuth");
 
-// example of a protected route
-// router.get("/users-only", withAuth, (req, res) => {
-//   // ...
-// });
-
-//route to display 3 coins on landing page
+//Gets Bitcoin, Ether, and Binance coin prices from coin market cap api
 router.get('/home', async (req, res) => {
   try {
     const responseBTC = await fetch(
@@ -33,14 +28,15 @@ router.get('/home', async (req, res) => {
         '&amount=1&symbol=BNB&convert=USD'
     );
     const { data: BNB } = await responseBNB.json();
-
-    res.send({ BTC, ETH, BNB }); // Send the data as JSON
+    // Send the data as JSON to frontend
+    res.send({ BTC, ETH, BNB });
   } catch (error) {
     console.error(error);
     res.status(500).send('⛔ Uh oh! An unexpected error occurred.');
   }
 });
 
+// Gets all posts and renders to My Profile
 router.get('/userpage', async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -51,9 +47,8 @@ router.get('/userpage', async (req, res) => {
         },
       ],
     });
-
     const posts = postData.map((post) => post.get({ plain: true }));
-
+    // Check to see if user is logged in
     let user = null;
     if (req.session.isLoggedIn) {
       user = await User.findByPk(req.session.userId, {
@@ -61,7 +56,7 @@ router.get('/userpage', async (req, res) => {
         raw: true,
       });
     }
-
+    // send current user and posts to frontend
     res.json({ user, posts });
   } catch (error) {
     console.error(error);
@@ -69,8 +64,7 @@ router.get('/userpage', async (req, res) => {
   }
 });
 
-//route for top 30 coins
-
+// Gets top 30 performing cryptos from coin market cap api
 router.get('/top30', async (req, res) => {
   try {
     const responseCoin = await fetch(
@@ -79,36 +73,18 @@ router.get('/top30', async (req, res) => {
         '&start=1&limit=30&convert=USD'
     );
     const { data: coins } = await responseCoin.json();
-
     const responseData = {
       title: 'Top 30',
       coins,
     };
-
     if (req.session.isLoggedIn) {
       responseData.isLoggedIn = true;
     }
-
     res.json(responseData);
   } catch (error) {
     console.error(error);
     res.status(500).send('⛔ Uh oh! An unexpected error occurred.');
   }
-});
-
-//TO-DO check if we need this code modified?
-router.get('/home/login', (req, res) => {
-  res.render('login', { title: 'Log-In Page' });
-});
-
-router.get('/home/login', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
-    res.redirect('/userpage');
-    return;
-  }
-
-  res.render('home');
 });
 
 module.exports = router;

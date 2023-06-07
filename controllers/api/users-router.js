@@ -1,6 +1,7 @@
 const { User } = require('../../models');
 const router = require('express').Router();
 
+// Signup for new users
 router.post('/signup', async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -16,6 +17,7 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+// Login existing user
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -38,6 +40,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Logout current user
 router.post('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {

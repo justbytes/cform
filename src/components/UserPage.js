@@ -81,7 +81,7 @@ const UserPage = () => {
         </div>
       ) : (
         <div>
-          <h3>Login to make a post!</h3>
+          <h3>Login to view and create posts!</h3>
         </div>
       )}
       <ListGroup>
