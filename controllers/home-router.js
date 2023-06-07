@@ -58,12 +58,12 @@ router.get('/userpage', async (req, res) => {
     );
     const { data: ETH } = await responseETH.json();
 
-    const responseUSDT = await fetch(
+    const responseBNB = await fetch(
       'https://pro-api.coinmarketcap.com/v1/tools/price-conversion?CMC_PRO_API_KEY=' +
         process.env.DB_APIKEY +
-        '&amount=1&symbol=USDT&convert=USD'
+        '&amount=1&symbol=BNB&convert=USD'
     );
-    const { data: USDT } = await responseUSDT.json();
+    const { data: BNB } = await responseUSDT.json();
 
     //code to display all posts
     const postData = await Post.findAll({
@@ -126,11 +126,11 @@ router.get('/top30', async (req, res) => {
 });
 
 //TO-DO check if we need this code modified?
-router.get('/login', (req, res) => {
+router.get('/home/login', (req, res) => {
   res.render('login', { title: 'Log-In Page' });
 });
 
-router.get('/login', (req, res) => {
+router.get('/home/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
     res.redirect('/userpage');

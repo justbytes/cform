@@ -39,3 +39,23 @@ code {
 }
 
 /* End of Home style */
+
+/* Login/Signup Style */
+.login-h1 {
+  text-align: center;
+  margin-top: 3%;
+}
+
+.login-signup {
+  width: 80%;
+  margin: 3% auto;
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.login-signup-btn-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+/* End of Login/Signup style */

@@ -14,7 +14,7 @@ function Navigation() {
           <Nav className="ml-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/">Top 30 list</Nav.Link>
-            <Nav.Link href="/">Log In</Nav.Link>
+            <Nav.Link href="/login">Log In</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

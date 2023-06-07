@@ -15,9 +15,9 @@ const Home = () => {
       .then((response) => {
         console.log(response);
         const { BTC, ETH, BNB } = response.data;
-        setBitcoinPrice(BTC.quote.USD.price);
-        setEtherPrice(ETH.quote.USD.price);
-        setBnbPrice(BNB.quote.USD.price);
+        setBitcoinPrice(BTC.quote.USD.price.toFixed(0));
+        setEtherPrice(ETH.quote.USD.price.toFixed(0));
+        setBnbPrice(BNB.quote.USD.price.toFixed(0));
       })
       .catch((error) => {
         console.error(error);
