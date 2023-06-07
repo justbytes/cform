@@ -3,12 +3,17 @@ import axios from 'axios';
 
 import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
 
 import TopThree from './TopThree';
+import PostModal from './PostModal';
 
 const UserPage = () => {
   const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(true);
+  const [userID, setUserID] = useState('');
+  const [username, setUsername] = useState('');
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +21,13 @@ const UserPage = () => {
         const response = await axios.get('/userpage');
         const { user, posts } = response.data;
         setUser(user);
-        setPosts(posts);
+        setUserID(user.id);
+        setUsername(user.username);
+        setPosts(
+          posts.sort(
+            (a, b) => new Date(b.date_created) - new Date(a.date_created)
+          )
+        );
         console.log(posts);
         console.log(user);
 
@@ -39,12 +50,30 @@ const UserPage = () => {
     fetchData();
   }, []);
 
+  const toggle = () => {
+    setModal(!modal);
+  };
+
+  const createPost = (e) => {
+    e.preventDefault();
+    toggle();
+  };
+
   return (
     <Container>
       <TopThree />
       {user ? (
         <div>
-          <h2>Welcome, {user.username}!</h2>
+          <h2>Welcome, {username}!</h2>
+          <Button onClick={createPost}>Create Post</Button>
+          {modal && (
+            <PostModal
+              show={modal}
+              username={username}
+              userID={userID}
+              toggle={toggle}
+            />
+          )}
         </div>
       ) : (
         <div>
