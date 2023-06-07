@@ -10,7 +10,7 @@ const { User, Post } = require('../models');
 // });
 
 //route to display 3 coins on landing page
-router.get('/', async (req, res) => {
+router.get('/home', async (req, res) => {
   try {
     const responseBTC = await fetch(
       'https://pro-api.coinmarketcap.com/v1/tools/price-conversion?CMC_PRO_API_KEY=' +
@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
         '&amount=1&symbol=BTC&convert=USD'
     );
     const { data: BTC } = await responseBTC.json();
+    console.log(responseBTC);
 
     const responseETH = await fetch(
       'https://pro-api.coinmarketcap.com/v1/tools/price-conversion?CMC_PRO_API_KEY=' +
@@ -26,19 +27,14 @@ router.get('/', async (req, res) => {
     );
     const { data: ETH } = await responseETH.json();
 
-    const responseUSDT = await fetch(
+    const responseBNB = await fetch(
       'https://pro-api.coinmarketcap.com/v1/tools/price-conversion?CMC_PRO_API_KEY=' +
         process.env.DB_APIKEY +
-        '&amount=1&symbol=USDT&convert=USD'
+        '&amount=1&symbol=BNB&convert=USD'
     );
-    const { data: USDT } = await responseUSDT.json();
+    const { data: BNB } = await responseBNB.json();
 
-    res.render('home', {
-      title: 'Home Page',
-      BTC,
-      ETH,
-      USDT,
-    });
+    res.send({ BTC, ETH, BNB }); // Send the data as JSON
   } catch (error) {
     console.error(error);
     res.status(500).send('⛔ Uh oh! An unexpected error occurred.');
