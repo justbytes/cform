@@ -11,7 +11,6 @@ const Watchlist = () => {
       try {
         const response = await fetch('/top30');
         const data = await response.json();
-        console.log(data);
         setCoins(data.coins);
         setIsLoading(false);
       } catch (error) {

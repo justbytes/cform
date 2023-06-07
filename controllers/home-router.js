@@ -41,31 +41,8 @@ router.get('/home', async (req, res) => {
   }
 });
 
-//route to display 3 coin prices and all posts IF logged in on userpage
 router.get('/userpage', async (req, res) => {
   try {
-    const responseBTC = await fetch(
-      'https://pro-api.coinmarketcap.com/v1/tools/price-conversion?CMC_PRO_API_KEY=' +
-        process.env.DB_APIKEY +
-        '&amount=1&symbol=BTC&convert=USD'
-    );
-    const { data: BTC } = await responseBTC.json();
-
-    const responseETH = await fetch(
-      'https://pro-api.coinmarketcap.com/v1/tools/price-conversion?CMC_PRO_API_KEY=' +
-        process.env.DB_APIKEY +
-        '&amount=1&symbol=ETH&convert=USD'
-    );
-    const { data: ETH } = await responseETH.json();
-
-    const responseBNB = await fetch(
-      'https://pro-api.coinmarketcap.com/v1/tools/price-conversion?CMC_PRO_API_KEY=' +
-        process.env.DB_APIKEY +
-        '&amount=1&symbol=BNB&convert=USD'
-    );
-    const { data: BNB } = await responseUSDT.json();
-
-    //code to display all posts
     const postData = await Post.findAll({
       include: [
         {
@@ -74,27 +51,18 @@ router.get('/userpage', async (req, res) => {
         },
       ],
     });
-    // Serialize data so the template can read it
+
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    let user;
+    let user = null;
     if (req.session.isLoggedIn) {
       user = await User.findByPk(req.session.userId, {
         exclude: ['password'],
         raw: true,
       });
     }
-    console.log(posts);
-    res.render('userpage', {
-      title: 'User Page',
 
-      isLoggedIn: req.session.isLoggedIn,
-      user,
-      posts,
-      BTC,
-      ETH,
-      USDT,
-    });
+    res.json({ user, posts });
   } catch (error) {
     console.error(error);
     res.status(500).send('⛔ Uh oh! An unexpected error occurred.');
