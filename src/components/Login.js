@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { navigate, useNavigate } from 'react-router-dom';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -18,8 +18,11 @@ function Login() {
     setPassword(event.target.value);
   }, []);
 
+  console.log(username, password);
+
   const handleLoginSubmit = async (e) => {
-    e.prevent.Default();
+    e.preventDefault();
+    console.log('you clicked login', password, username);
 
     try {
       const response = await axios.post('api/users/login', {
@@ -28,14 +31,39 @@ function Login() {
       });
       const { id } = response.data;
       console.log('User logged in with id of:', id);
-      // Assuming the response contains a property called "success" indicating successful login
-      if (response.data.success) {
-        navigate('/');
-      } else {
-        console.log('Login failed');
-      }
+      navigate('/');
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const handleSignupSubmit = async (e) => {
+    e.preventDefault();
+    console.log('you clicked signup', password, username);
+    try {
+      const response = await axios.post('/api/users/signup', {
+        username,
+        password,
+      });
+      const { id } = response.data;
+      console.log('New user ID is:', id);
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleLogoutSubmit = async (e) => {
+    e.preventDefault();
+    console.log('you clicked logout');
+    try {
+      await axios.post('/api/users/logout');
+      // Assuming the logout was successful
+      console.log('Logged out successfully');
+      // Perform any additional actions after logout if needed
+    } catch (error) {
+      console.error(error);
+      // Handle any errors that occur during logout
     }
   };
 
@@ -65,15 +93,14 @@ function Login() {
           />
         </Form.Group>
         <div className="login-signup-btn-container">
-          <Button
-            variant="primary"
-            type="submit"
-            onSubmit={(e) => handleLoginSubmit}
-          >
+          <Button variant="primary" onClick={handleLoginSubmit}>
             Login
           </Button>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" onClick={handleSignupSubmit}>
             Signup
+          </Button>
+          <Button variant="primary" onClick={handleLogoutSubmit}>
+            logout
           </Button>
         </div>
       </Form>
