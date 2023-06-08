@@ -15,7 +15,6 @@ const TopThree = () => {
     axios
       .get('/home')
       .then((response) => {
-        console.log(response);
         const { BTC, ETH, BNB } = response.data;
         // Format so there is no decimal
         setBitcoinPrice(BTC.quote.USD.price.toFixed(0));
@@ -33,18 +32,18 @@ const TopThree = () => {
         <Card.Body className="top-three-body">
           <div className="bitcoin-home">
             <h2>Bitcoin</h2>
-            <br />
-            <h5>{bitcoinPrice}</h5>
+            <h6>Current Price</h6>
+            <h5>${bitcoinPrice}</h5>
           </div>
           <div className="ether-home">
             <h2>Ethereum</h2>
-            <br />
-            <h5>{etherPrice}</h5>
+            <h6>Current Price</h6>
+            <h5>${etherPrice}</h5>
           </div>
           <div className="bnb-home">
             <h2>Binance Coin</h2>
-            <br />
-            <h5>{bnbPrice}</h5>
+            <h6>Current Price</h6>
+            <h5>${bnbPrice}</h5>
           </div>
         </Card.Body>
       </Card>

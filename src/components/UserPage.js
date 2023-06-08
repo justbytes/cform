@@ -5,6 +5,7 @@ import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 // Import componenets
 import TopThree from './TopThree';
@@ -13,7 +14,7 @@ import PostModal from './PostModal';
 const UserPage = () => {
   // Set state variables
   const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(null);
   const [userID, setUserID] = useState('');
   const [username, setUsername] = useState('');
   const [modal, setModal] = useState(false);
@@ -67,7 +68,7 @@ const UserPage = () => {
     <Container>
       <TopThree />
       {user ? (
-        <div>
+        <div className="create-user-post">
           <h2>Welcome, {username}!</h2>
           <Button onClick={createPost}>Create Post</Button>
           {modal && (
@@ -80,19 +81,25 @@ const UserPage = () => {
           )}
         </div>
       ) : (
-        <div>
+        <div className="create-user-post">
           <h3>Login to view and create posts!</h3>
         </div>
       )}
-      <ListGroup>
+      <div className="posts-container">
         {posts.map((post) => (
-          <ListGroup.Item key={post.id}>
-            <p>{post.description}</p>
-            <p>Created by: {post.name}</p>
-            <p>Create on: {post.formattedDate}</p>
-          </ListGroup.Item>
+          <Card key={post.id} className="mb-3">
+            <Card.Header>
+              <div className="d-flex justify-content-between">
+                <div>{post.name}</div>
+                <div>{post.formattedDate}</div>
+              </div>
+            </Card.Header>
+            <Card.Body>
+              <Card.Text>{post.description}</Card.Text>
+            </Card.Body>
+          </Card>
         ))}
-      </ListGroup>
+      </div>
     </Container>
   );
 };

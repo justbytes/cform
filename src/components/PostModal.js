@@ -45,16 +45,17 @@ const PostModal = ({ username, userID, toggle }) => {
           <Form.Group>
             <Form.Label>Description</Form.Label>
             <Form.Control
-              type="text"
+              as="textarea"
               name="description"
               onChange={handleChange}
               placeholder="Post it to the community..."
+              rows={3}
             />
           </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="success" onClick={handlePost}>
+        <Button variant="primary" onClick={handlePost}>
           Post
         </Button>
       </Modal.Footer>

@@ -5,6 +5,7 @@ import axios from 'axios';
 import { navigate, useNavigate } from 'react-router-dom';
 
 // Import bootstrap
+import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
@@ -27,6 +28,10 @@ function Login() {
   // Login handler
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+
+    if ((username === '') | (password === ''))
+      alert('Please enter a username and password');
+
     try {
       const response = await axios.post('api/users/login', {
         username,
@@ -58,25 +63,20 @@ function Login() {
     }
   };
 
-  const handleLogoutSubmit = async (e) => {
-    e.preventDefault();
-    console.log('you clicked logout');
-    try {
-      await axios.post('/api/users/logout');
-      // Assuming the logout was successful
-      console.log('Logged out successfully');
-      // Perform any additional actions after logout if needed
-    } catch (error) {
-      console.error(error);
-      // Handle any errors that occur during logout
-    }
-  };
-
   return (
     <>
-      <div>
-        <h1 className="login-h1">Login or Signup</h1>
+      <div className="row1 login-h1 ">
+        <div className="col s12 m6">
+          <Card>
+            <Card.Body>
+              <Card.Title>
+                <h3>LOGIN / SIGNUP</h3>
+              </Card.Title>
+            </Card.Body>
+          </Card>
+        </div>
       </div>
+
       <Form className="login-signup">
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Username</Form.Label>
@@ -98,14 +98,19 @@ function Login() {
           />
         </Form.Group>
         <div className="login-signup-btn-container">
-          <Button variant="primary" onClick={handleLoginSubmit}>
+          <Button
+            className="login-btn"
+            variant="primary"
+            onClick={handleLoginSubmit}
+          >
             Login
           </Button>
-          <Button variant="primary" onClick={handleSignupSubmit}>
+          <Button
+            className="signup-btn"
+            variant="primary"
+            onClick={handleSignupSubmit}
+          >
             Signup
-          </Button>
-          <Button variant="primary" onClick={handleLogoutSubmit}>
-            logout
           </Button>
         </div>
       </Form>

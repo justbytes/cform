@@ -9,12 +9,15 @@ const Home = () => {
     <>
       <TopThree />
       <Card className="home-content-card">
-        <Card.Header>Welcome</Card.Header>
+        <Card.Header>
+          <h4>Welcome</h4>
+        </Card.Header>
         <Card.Body className="home-content-body">
           <p>
-            Your crypto community awaits you! Follow your favoite coins with
-            your favoite people. Log in now to view community posts, create your
-            own posts, or go check out the top 30 performing cryptocurrencies!
+            Your crypto community awaits you! Follow your favorite coins with
+            your favorite people. Log in now to view community posts, create
+            your own posts, or go check out the top 30 performing
+            cryptocurrencies!
           </p>
         </Card.Body>
       </Card>
