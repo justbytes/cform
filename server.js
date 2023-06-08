@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(router);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname + 'build/index.html'));
 });
 
 // Connect to the database and start the server
