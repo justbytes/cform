@@ -23,7 +23,7 @@ const UserPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('cform.herokuapp.com/userpage');
+        const response = await axios.get('/userpage');
         const { user, posts } = response.data;
         setUser(user);
         setUserID(user.id);
