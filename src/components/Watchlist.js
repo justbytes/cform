@@ -13,7 +13,7 @@ const Watchlist = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://cform.herokuapp.com/top30');
+        const response = await fetch('cform.herokuapp.com/top30');
         const data = await response.json();
         setCoins(data.coins);
         setIsLoading(false);

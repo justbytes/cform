@@ -13,7 +13,7 @@ const TopThree = () => {
   // Get BTC, ETHER, BNB current price and set to state var
   useEffect(() => {
     axios
-      .get('https://cform.herokuapp.com/home')
+      .get('cform.herokuapp.com/home')
       .then((response) => {
         const { BTC, ETH, BNB } = response.data;
         // Format so there is no decimal

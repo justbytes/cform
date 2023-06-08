@@ -11,7 +11,7 @@ function Navigation() {
   const navigation = useNavigate();
   const handleLogout = async () => {
     try {
-      await axios.post('https://cform.herokuapp.com/api/users/logout');
+      await axios.post('cform.herokuapp.com/api/users/logout');
       alert('Logged out successfully');
       navigate('/');
     } catch (error) {

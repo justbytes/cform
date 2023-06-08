@@ -33,13 +33,10 @@ function Login() {
       alert('Please enter a username and password');
 
     try {
-      const response = await axios.post(
-        'https://cform.herokuapp.com/api/users/login',
-        {
-          username,
-          password,
-        }
-      );
+      const response = await axios.post('cform.herokuapp.com/api/users/login', {
+        username,
+        password,
+      });
       const { id, success } = response.data;
       // Redirect on success
       if (success) navigate('/user-page');
@@ -53,7 +50,7 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'https://cform.herokuapp.com//api/users/signup',
+        'cform.herokuapp.com//api/users/signup',
         {
           username,
           password,

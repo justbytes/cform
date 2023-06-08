@@ -29,7 +29,7 @@ const PostModal = ({ username, userID, toggle }) => {
     };
     try {
       const response = await axios.post(
-        'https://cform.herokuapp.com/api/post/posts',
+        'cform.herokuapp.com/api/post/posts',
         postData
       );
       toggle();
