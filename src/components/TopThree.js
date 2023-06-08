@@ -13,7 +13,7 @@ const TopThree = () => {
   // Get BTC, ETHER, BNB current price and set to state var
   useEffect(() => {
     axios
-      .get('/home')
+      .get('/')
       .then((response) => {
         const { BTC, ETH, BNB } = response.data;
         // Format so there is no decimal
