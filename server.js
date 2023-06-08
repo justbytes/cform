@@ -11,14 +11,15 @@ const app = express();
 
 // setup app middleware
 app.use(sessionMiddleware);
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static('public'));
+app.use(express.static('build'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// connect routes
+// Connect routes
 app.use(router);
 
+// Serve the React app
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
